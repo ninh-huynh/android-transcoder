@@ -1,13 +1,16 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '25.0.0'
+    namespace 'net.ypresto.androidtranscoder.example'
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "net.ypresto.androidtranscoder.example"
-        minSdkVersion 18
-        targetSdkVersion 24
+        minSdk rootProject.ext.minSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -17,9 +20,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
-    compile project(':lib')
-    compile 'com.android.support:support-core-utils:24.2.0'
+    def core_version = "1.10.0"
+
+    implementation project(':lib')
+    implementation "androidx.core:core-ktx:$core_version"
 }
